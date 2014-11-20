@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Ernane, Pedro Thiago" name="author">
+    <title>Exportar</title>
+    
+    <style>
+        .container
+        {
+            width: 500px;
+            max-width: 1000px;
+            height: auto;
+            word-wrap: break-word; 
+        }
+    </style>
+    
+    <script src="js/jquery.min.js"></script>
+    <script>
+         $.urlParam = function(name)
+         {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(decodeURIComponent(window.location.href));
+            if (results==null){
+               return null;
+            }
+            else{
+               return results[1] || 0;
+            }
+        }
+        
+        $(function() 
+        {
+            var latex = $.urlParam('latex');
+            $("#latex").html("$$"+latex+"$$");    
+        });
+    </script>
+  </head>
+
+  <body>
+
+    <div id="latex" class="container exportar"></div> <!-- /container -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  "HTML-CSS": { linebreaks: { automatic: true, width: "75% container" } },
+});
+</script>
+      
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config(
+      {
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          multiLine: true,
+        },
+        jax: ["input/TeX","output/HTML-CSS"],
+        displayAlign: "left",
+    });
+    </script>
+    <script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+</body>
+</html>

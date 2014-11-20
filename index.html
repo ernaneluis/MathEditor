@@ -1,0 +1,409 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+
+    <title>Math Editor</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <link rel="stylesheet"  href="css/mathquill.css" type="text/css">
+
+    <style>
+      .input
+      {
+         height: 300px;
+         width: 100%;
+      }
+
+
+      .output {
+        padding: 1em;
+        height: 300px;
+        width: 100%;
+      }
+      .box {position: relative}
+        
+    .footer 
+    {    
+        bottom: 0px;
+        width: 100%;
+        height: 60px;
+        background-color: #F5F5F5;
+        margin-top: 20px;
+    }
+        
+    .dropdown-menu-symbols > li > a 
+    {
+       padding: 1px 20px;
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <div role="navigation" class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand">Math Editor</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+              
+               <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle">Ajuda <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="http://en.wikibooks.org/wiki/LaTeX/Mathematics">Wikipedia</a></li>
+                <li><a href="http://milde.users.sourceforge.net/LUCR/Math/mathpackages/MnSymbol-symbols.pdf">Comandos Suportados</a></li>
+              </ul>
+            </li>
+            
+
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Texto <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a latex="\text">Inserir Texto</a></li>
+                <li><a latex="\\">Pular Linha</a></li>
+                <li><a latex="\;">Espaço</a></li>
+                  
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Operações <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a latex-write="\lim_{}">Limite</a></li>
+                <li><a latex="\frac">Fração</a></li>
+                <li><a latex="\sqrt">Raiz Quadrada</a></li>
+                <li><a latex="\sqrt[3]">Raiz Cubica</a></li>
+                <li><a latex="\sqrt[4]">Raiz Quarta</a></li>
+              </ul>
+            </li>
+              
+              <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Simbolos <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu dropdown-menu-symbols">
+                <li><a latex="\to"      data-toggle="tooltip" data-placement="right" title="Para"> $${\to}$$</a></li>
+                <li><a latex="\infty"   data-toggle="tooltip" data-placement="right" title="Infinito">$${\infty}$$</a></li>
+                <li><a latex="\pm"      data-toggle="tooltip" data-placement="right" title="Mais ou Menos"> $${\pm}$$</a></li>
+                <li><a latex="\in"      data-toggle="tooltip" data-placement="right" title="Pertence"> $${\in}$$</a></li>
+                <li><a latex="\notin"   data-toggle="tooltip" data-placement="right" title="Não Pertence"> $${\notin}$$</a></li>
+                <li><a latex="\cong"    data-toggle="tooltip" data-placement="right" title="Aproximadamente igual"> $${\cong}$$</a></li>
+                <li><a latex="\approx"  data-toggle="tooltip" data-placement="right" title="Aproximado"> $${\approx}$$</a></li>
+                <li><a latex="\ne"      data-toggle="tooltip" data-placement="right" title="Diferente"> $${\ne}$$</a></li>
+                <li><a latex="\le"      data-toggle="tooltip" data-placement="right" title="Menor ou Igual"> $${\le}$$</a></li>
+                <li><a latex="\ge"      data-toggle="tooltip" data-placement="right" title="Maior ou Igual"> $${\ge}$$</a></li>
+                <li><a latex="\sum"     data-toggle="tooltip" data-placement="right" title="Somatório"> $${\sum}$$</a></li>
+                <li><a latex="\prod"    data-toggle="tooltip" data-placement="right" title="Produtório"> $${\prod}$$</a></li>
+                <li><a latex="\int"     data-toggle="tooltip" data-placement="right" title="Integral"> $${\int}$$</a></li>
+              </ul>
+            </li>
+              
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Trigonometria <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a latex="\sin">Seno</a></li>
+                <li><a latex="\cos">Cosseno</a></li>
+                <li><a latex="\tan">Tangente</a></li>
+                <li><a latex="\sec">Secante</a></li>
+                <li><a latex="\cosec">Cosecante</a></li>
+                <li><a latex="\cotan">Cotangente</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Letras Gregas <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu dropdown-menu-symbols">
+                <li><a latex="\alpha"   data-toggle="tooltip" data-placement="right" title="alpha"> $${\alpha}$$ </a></li>
+                <li><a latex="\beta"    data-toggle="tooltip" data-placement="right" title="beta">  $${\beta}$$</a></li>
+                <li><a latex="\gamma"   data-toggle="tooltip" data-placement="right" title="gamma"> $${\gamma}$$</a></li>
+                <li><a latex="\Gamma"   data-toggle="tooltip" data-placement="right" title="Gamma"> $${\Gamma}$$</a></li>
+                <li><a latex="\delta"   data-toggle="tooltip" data-placement="right" title="delta"> $${\delta}$$</a></li>
+                <li><a latex="\Delta"   data-toggle="tooltip" data-placement="right" title="Delta"> $${\Delta}$$</a></li>
+                <li><a latex="\zeta"    data-toggle="tooltip" data-placement="right" title="Zeta">  $${\zeta}$$</a></li>
+                <li><a latex="\theta"   data-toggle="tooltip" data-placement="right" title="theta"> $${\theta}$$</a></li>
+                <li><a latex="\Theta"   data-toggle="tooltip" data-placement="right" title="Theta"> $${\Theta}$$</a></li>
+                <li><a latex="\sigma"   data-toggle="tooltip" data-placement="right" title="sigma"> $${\sigma}$$</a></li>
+                <li><a latex="\Sigma"   data-toggle="tooltip" data-placement="right" title="Sigma"> $${\Sigma}$$</a></li>
+                <li><a latex="\psi"     data-toggle="tooltip" data-placement="right" title="psi">   $${\psi}$$</a></li>
+                <li><a latex="\Psi"     data-toggle="tooltip" data-placement="right" title="Psi">   $${\Psi}$$</a></li>
+                <li><a latex="\omega"   data-toggle="tooltip" data-placement="right" title="omega"> $${\omega}$$</a></li>
+                <li><a latex="\Omega"   data-toggle="tooltip" data-placement="right" title="Omega"> $${\Omega}$$</a></li>
+                <li><a latex="\pi"      data-toggle="tooltip" data-placement="right" title="pi">    $${\pi}$$</a></li>
+                <li><a latex="\Pi"      data-toggle="tooltip" data-placement="right" title="Pi">    $${\Pi}$$</a></li>
+                
+              </ul>
+            </li>
+              
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Conjuntos <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu dropdown-menu-symbols">
+                <li><a latex="\mathbb{R}" data-toggle="tooltip" data-placement="right" title="Reais">       $${\mathbb{R}}$$</a></li>
+                <li><a latex="\mathbb{Z}" data-toggle="tooltip" data-placement="right" title="Inteiros">    $${\mathbb{Z}}$$</a></li>
+                <li><a latex="\mathbb{N}" data-toggle="tooltip" data-placement="right" title="Naturais">    $${\mathbb{N}}$$</a></li>
+                <li><a latex="\mathbb{Q}" data-toggle="tooltip" data-placement="right" title="Racionais">   $${\mathbb{Q}}$$</a></li>
+              </ul>
+            </li> 
+             
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Exportar <span class="caret"> </span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#" id="exportar-img">Imagem</a></li>
+                <li><a href="#" id="exportar-pdf">PDF</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+    <div class="container">
+
+      <!-- math quill -->
+      <span id="editable-math" name="input" class="input mathquill-editable"> 
+            \lim_{x\to1}\frac{x^2+2x-3}{x-1}
+      </span>
+
+      <div style="border: 1px solid black;">
+          
+        <input id="MathInput" type="hidden" oninput="UpdateMath(this.value)" />
+          
+        <div class="box" id="box" style="visibility:hidden">
+          <!-- math jax -->
+          <div id="MathOutput" class="output" style="text-align: left;">$${}$$</div>
+        </div>
+          
+      </div>
+
+      <textarea id="latex-source" name="latex-source" class="input" style="height:100px;"></textarea>
+
+      <form action="exportar.php" method="POST" id="formToExport">
+        <input type="hidden" name="dataToExport" id="dataToExport" value="">
+      </form>
+
+    </div> <!-- /container -->
+
+      
+      <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Desenvolvido por <a href="mailto:ernane.luis@gmail.com">Ernane Aguiar</a> e <a href="mailto:pedroholanda@gmail.com">Pedro Holanda</a></p>
+            
+            <iframe src="http://ghbtns.com/github-btn.html?user=ernaneluis&repo=ernaneluis.github.io&type=fork&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+        </div>
+    </footer>
+
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config(
+  {
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true,
+      multiLine: true,
+    },
+    jax: ["input/TeX","output/HTML-CSS"],
+    displayAlign: "left",
+    "HTML-CSS": { linebreaks: { automatic: true, width: "30em" } },
+});
+</script>
+<script type="text/javascript" src="MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+
+<script>
+  //
+  //  Use a closure to hide the local variables from the
+  //  global namespace
+  //
+  (function () {
+    var QUEUE = MathJax.Hub.queue;  // shorthand for the queue
+    var math = null, box = null;    // the element jax for the math output, and the box it's in
+
+    //
+    //  Hide and show the box (so it doesn't flicker as much)
+    //
+    var HIDEBOX = function () {box.style.visibility = "hidden"}
+    var SHOWBOX = function () {box.style.visibility = "visible"}
+
+    //
+    //  Get the element jax when MathJax has produced it.
+    //
+    QUEUE.Push(function () {
+      math = MathJax.Hub.getAllJax("MathOutput")[0];
+      box = document.getElementById("box");
+      SHOWBOX(); // box is initially hidden so the braces don't show
+    });
+
+    //
+    //  The onchange event handler that typesets the math entered
+    //  by the user.  Hide the box, then typeset, then show it again
+    //  so we don't see a flash as the math is cleared and replaced.
+    //
+    window.UpdateMath = function (TeX)
+    {
+      QUEUE.Push(HIDEBOX,["Text",math,"\\displaystyle{"+TeX+"}"],SHOWBOX);
+    }
+  })();
+</script>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/mathquill.js"></script>
+
+    <script type="text/javascript">
+
+    //global vars
+    var latexMath     = $('#editable-math');
+    var latexSource   = $('#latex-source');
+    var htmlSource    = $('#html-source');
+        
+    //initializing tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $("#exportar-pdf").click(function()
+    {   
+      var latex = latexSource.val();
+      var url = "export.html?latex="+latex;
+      window.open( url);
+    });
+        
+    $('#exportar-img').click(function() {
+      var latex = latexSource.val();
+      var url = "http://latex.codecogs.com/gif.latex?"+latex;
+      window.open(url);
+    });
+        
+    //acoes dos botoes
+    $("[latex]").click(function()
+    {
+       var key = $(this).attr('latex');
+       latexMath.mathquill('cmd', key);
+       refresh();
+        
+        //foca na textarea
+       latexMath.find('textarea').focus();
+    });
+        
+    $("[latex-write]").click(function()
+    {        
+       var key = $(this).attr('latex-write');
+       latexMath.mathquill('write', key);
+       refresh();
+
+       latexMath.find('textarea').focus();
+    });
+    
+    function refresh()
+    {
+        var latex = latexMath.mathquill('latex');
+        latexSource.val(latex);
+        htmlSource.text(printTree(latexMath.mathquill('html')));
+        $('#MathInput').val(latex);
+        UpdateMath(latex);
+    }
+       
+    //on ready
+    $(function() 
+    {
+        
+      latexMath.find('textarea').focus();
+        
+      //editor  
+      latexMath.bind('keydown keypress mousemove', function()
+      {
+          
+        setTimeout(function() {
+          var latex = latexMath.mathquill('latex');
+          latexSource.val(latex);
+          htmlSource.text(printTree(latexMath.mathquill('html')));
+
+            $('#MathInput').val(latex);
+            UpdateMath(latex);
+
+        });
+
+      }).keydown().focus();
+
+
+      //source
+      latexSource.bind('keydown keypress mousemove', function()
+      {
+
+        var oldtext = latexSource.val();
+        setTimeout(function() {
+          var newtext = latexSource.val();
+          if(newtext !== oldtext) {
+            latexMath.mathquill('latex', newtext);
+            htmlSource.text(printTree(latexMath.mathquill('html')));
+
+            $('#MathInput').val(newtext);
+            UpdateMath(newtext);    
+          }
+            
+        });
+
+      });
+        
+      //main
+      if(location.hash && location.hash.length > 1)
+      {
+        latexMath.mathquill('latex', decodeURIComponent(location.hash.slice(1))).focus();
+      }
+            
+        
+    }); //end jquery 
+        
+        
+
+    //print the HTML source as an indented tree. TODO: syntax highlight
+    function printTree(html) 
+    {
+      html = html.match(/<[a-z]+|<\/[a-z]+>|./ig);
+      if (!html) return '';
+      var indent = '\n', tree = [];
+      for (var i = 0; i < html.length; i += 1) {
+        var token = html[i];
+        if (token.charAt(0) === '<') {
+          if (token.charAt(1) === '/') { //dedent on close tag
+            indent = indent.slice(0,-2);
+            if (html[i+1] && html[i+1].slice(0,2) === '</') //but maintain indent for close tags that come after other close tags
+              token += indent.slice(0,-2);
+          }
+          else { //indent on open tag
+            tree.push(indent);
+            indent += '  ';
+          }
+
+          token = token.toLowerCase();
+        }
+
+        tree.push(token);
+      }
+      return tree.join('').slice(1);
+    }
+         
+</script>
+      
+</body>
+</html>
